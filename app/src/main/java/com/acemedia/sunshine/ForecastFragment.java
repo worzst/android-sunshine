@@ -1,6 +1,7 @@
 package com.acemedia.sunshine;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,8 +15,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -105,16 +108,6 @@ public class ForecastFragment extends Fragment {
         // Inflate the layout for this fragment
 
         forecastArrayList = new ArrayList<>();
-        forecastArrayList.add("Today - Sunny - 35°");
-        forecastArrayList.add("Tomorrow - Sunny - 37°");
-        forecastArrayList.add("Wed - Rain - 29°");
-        forecastArrayList.add("Thur - Snow - -1°");
-        forecastArrayList.add("Fri - Cloudy - 25°");
-        forecastArrayList.add("Sat - Snow - 2°");
-        forecastArrayList.add("Sun - Sunny - 38°");
-        forecastArrayList.add("Mon - Rain - 18°");
-        forecastArrayList.add("Tue - Rain - 15°");
-        forecastArrayList.add("Wed - Cloudy - 23°");
 
         forecastArrayAdapter = new ArrayAdapter<>(getContext(), R.layout.list_item_forecast, R.id.list_item_forecast_textview, forecastArrayList);
 
@@ -122,6 +115,21 @@ public class ForecastFragment extends Fragment {
 
         ListView forecastList = (ListView) rootView.findViewById(R.id.listview_forecast);
         forecastList.setAdapter(forecastArrayAdapter);
+
+        forecastList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String forecast = forecastArrayAdapter.getItem(i);
+                Toast.makeText(getActivity(), forecast, Toast.LENGTH_SHORT).show();
+
+                Intent detailIntent = new Intent(getActivity().getApplicationContext(), DetailActivity.class).putExtra(Intent.EXTRA_TEXT, forecast);
+                startActivity(detailIntent);
+            }
+        });
+
+        FetchWeatherTask fetchWeatherTask = new FetchWeatherTask();
+        fetchWeatherTask.execute("10400");
+
         return rootView;
     }
 

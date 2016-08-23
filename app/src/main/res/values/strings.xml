@@ -4,4 +4,6 @@
     <string name="openweather_api_key">86683dadec5b76dcb0395d917d747502</string>
 
     <string name="action_refresh" translatable="false">Refresh</string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="action_settings">Settings</string>
 </resources>
