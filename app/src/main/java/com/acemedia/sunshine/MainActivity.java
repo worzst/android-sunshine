@@ -8,6 +8,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +30,23 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        ArrayList<String> weekForecast = new ArrayList<>();
+        weekForecast.add("Today - Sunny - 35°");
+        weekForecast.add("Tomorrow - Sunny - 37°");
+        weekForecast.add("Wed - Rain - 29°");
+        weekForecast.add("Thur - Snow - -1°");
+        weekForecast.add("Fri - Cloudy - 25°");
+        weekForecast.add("Sat - Snow - 2°");
+        weekForecast.add("Sun - Sunny - 38°");
+        weekForecast.add("Mon - Rain - 18°");
+        weekForecast.add("Tue - Rain - 15°");
+        weekForecast.add("Wed - Cloudy - 23°");
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.list_item_forecast, R.id.list_item_forecast_textview, weekForecast);
+
+        ListView forecastList = (ListView) findViewById(R.id.listview_forecast);
+        forecastList.setAdapter(arrayAdapter);
     }
 
     @Override
