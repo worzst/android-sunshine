@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Sunshine</string>
 
+    <string name="openweather_api_key">86683dadec5b76dcb0395d917d747502</string>
+
     <string name="action_refresh" translatable="false">Refresh</string>
 </resources>
