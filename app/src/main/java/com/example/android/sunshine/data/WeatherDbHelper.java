@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.acemedia.sunshine.data;
+package com.example.android.sunshine.data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.acemedia.sunshine.data.WeatherContract.LocationEntry;
-import com.acemedia.sunshine.data.WeatherContract.WeatherEntry;
+import com.example.android.sunshine.data.WeatherContract.LocationEntry;
+import com.example.android.sunshine.data.WeatherContract.WeatherEntry;
 
 /**
  * Manages a local database for weather data.

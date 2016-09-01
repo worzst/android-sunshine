@@ -1,4 +1,4 @@
-package com.acemedia.sunshine.data;
+package com.example.android.sunshine.data;
 
 import android.content.ContentValues;
 import android.database.ContentObserver;

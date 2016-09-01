@@ -13,15 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.acemedia.sunshine.data;
+package com.example.android.sunshine.data;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.test.AndroidTestCase;
-import android.text.TextUtils;
-
-import com.acemedia.sunshine.data.WeatherDbHelper;
 
 import java.util.HashSet;
 
