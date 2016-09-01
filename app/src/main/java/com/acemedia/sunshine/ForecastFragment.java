@@ -39,8 +39,7 @@ import java.util.Arrays;
 
 public class ForecastFragment extends Fragment {
 
-    private ArrayList<String> forecastArrayList;
-    private ArrayAdapter<String> forecastArrayAdapter;
+    private ArrayAdapter<String> mForecastArrayAdapter;
 
     public ForecastFragment() {
         // Required empty public constructor
@@ -52,7 +51,7 @@ public class ForecastFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
-    /*
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_forecast_fragment, menu);
@@ -65,32 +64,26 @@ public class ForecastFragment extends Fragment {
         if (id == R.id.action_refresh) {
             updateWeather();
             return true;
-        } else if (id == R.id.action_settings) {
-            Intent intent = new Intent(getActivity(), SettingsActivity.class);
-            startActivity(intent);
-            return true;
         }
         return super.onOptionsItemSelected(item);
-    }*/
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        forecastArrayList = new ArrayList<>();
-
-        forecastArrayAdapter = new ArrayAdapter<>(getContext(), R.layout.list_item_forecast, R.id.list_item_forecast_textview, forecastArrayList);
+        mForecastArrayAdapter = new ArrayAdapter<>(getContext(), R.layout.list_item_forecast, R.id.list_item_forecast_textview, new ArrayList<String>());
 
         View rootView = inflater.inflate(R.layout.fragment_forecast, container, false);
 
         ListView forecastList = (ListView) rootView.findViewById(R.id.listview_forecast);
-        forecastList.setAdapter(forecastArrayAdapter);
+        forecastList.setAdapter(mForecastArrayAdapter);
 
         forecastList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String forecast = forecastArrayAdapter.getItem(i);
+                String forecast = mForecastArrayAdapter.getItem(i);
                 Toast.makeText(getActivity(), forecast, Toast.LENGTH_SHORT).show();
 
                 Intent detailIntent = new Intent(getActivity().getApplicationContext(), DetailActivity.class).putExtra(Intent.EXTRA_TEXT, forecast);
@@ -316,22 +309,6 @@ public class ForecastFragment extends Fragment {
                 }
             }
 
-            //Log.i("JSON", forecastJsonStr);
-            /*
-            try {
-                JSONObject weather = new JSONObject(forecastJsonStr);
-                JSONArray days = weather.getJSONArray("list");
-                for (int i=0; i<days.length(); i++) {
-                    JSONObject object = days.getJSONObject(i);
-                    Double maxTemp = object.getJSONObject("temp").getDouble("max");
-                    Log.i(LOG_TAG, maxTemp.toString());
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }*/
-
-            //Log.i(LOG_TAG, "Finished loading JSON");
-
             try {
                 int numDays = new JSONObject(forecastJsonStr).getJSONArray("list").length();
                 return getWeatherDataFromJson(forecastJsonStr, numDays);
@@ -345,16 +322,12 @@ public class ForecastFragment extends Fragment {
         @Override
         protected void onPostExecute(String[] result) {
             super.onPostExecute(result);
-            /*if (result != null) {
-                forecastArrayAdapter.clear();
-                for (String dayForecastStr : result) {
-                    forecastArrayAdapter.add(dayForecastStr);
+            if (result != null) {
+                mForecastArrayAdapter.clear();
+                for(String dayForecastStr : result) {
+                    mForecastArrayAdapter.add(dayForecastStr);
                 }
-            }*/
-
-            forecastArrayList.clear();
-            forecastArrayList.addAll(Arrays.asList(result));
-            forecastArrayAdapter.notifyDataSetChanged();
+            }
         }
     }
 }

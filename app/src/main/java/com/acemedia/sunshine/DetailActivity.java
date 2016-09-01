@@ -24,18 +24,17 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container, new DetailFragment())
+                    .commit();
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_detail, menu);
         return true;
     }
 
@@ -50,24 +49,19 @@ public class DetailActivity extends AppCompatActivity {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
             return true;
-        } else if (id == R.id.action_map) {
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            if(intent.resolveActivity(getPackageManager()) != null) {
-                startActivity(intent);
-            }
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    public static class DetailActivityFragment extends Fragment {
+    public static class DetailFragment extends Fragment {
 
-        private static final String LOG_TAG = DetailActivityFragment.class.getSimpleName();
+        private static final String LOG_TAG = DetailFragment.class.getSimpleName();
 
         private static final String FORECAST_SHARE_HASHTAG = " #SunshineApp";
         private String mForecastStr;
 
-        public DetailActivityFragment() {
+        public DetailFragment() {
             setHasOptionsMenu(true);
         }
 
@@ -88,7 +82,7 @@ public class DetailActivity extends AppCompatActivity {
 
         @Override
         public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-            inflater.inflate(R.menu.menu_detail, menu);
+            inflater.inflate(R.menu.menu_detail_fragment, menu);
 
             MenuItem menuItem = menu.findItem(R.id.action_share);
 
