@@ -52,6 +52,7 @@ public class ForecastFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
+    /*
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_forecast_fragment, menu);
@@ -70,7 +71,7 @@ public class ForecastFragment extends Fragment {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
