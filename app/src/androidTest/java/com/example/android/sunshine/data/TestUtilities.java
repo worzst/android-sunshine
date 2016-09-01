@@ -1,14 +1,16 @@
 package com.example.android.sunshine.data;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.ContentObserver;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.test.AndroidTestCase;
 
-import com.acemedia.sunshine.utils.PollingCheck;
+import com.example.android.sunshine.utils.PollingCheck;
 
 import java.util.Map;
 import java.util.Set;
@@ -79,20 +81,20 @@ public class TestUtilities extends AndroidTestCase {
         Students: You can uncomment this function once you have finished creating the
         LocationEntry part of the WeatherContract as well as the WeatherDbHelper.
      */
-//    static long insertNorthPoleLocationValues(Context context) {
-//        // insert our test records into the database
-//        WeatherDbHelper dbHelper = new WeatherDbHelper(context);
-//        SQLiteDatabase db = dbHelper.getWritableDatabase();
-//        ContentValues testValues = TestUtilities.createNorthPoleLocationValues();
-//
-//        long locationRowId;
-//        locationRowId = db.insert(WeatherContract.LocationEntry.TABLE_NAME, null, testValues);
-//
-//        // Verify we got a row back.
-//        assertTrue("Error: Failure to insert North Pole Location Values", locationRowId != -1);
-//
-//        return locationRowId;
-//    }
+    static long insertNorthPoleLocationValues(Context context) {
+        // insert our test records into the database
+        WeatherDbHelper dbHelper = new WeatherDbHelper(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues testValues = TestUtilities.createNorthPoleLocationValues();
+
+        long locationRowId;
+        locationRowId = db.insert(WeatherContract.LocationEntry.TABLE_NAME, null, testValues);
+
+        // Verify we got a row back.
+        assertTrue("Error: Failure to insert North Pole Location Values", locationRowId != -1);
+
+        return locationRowId;
+    }
 
     /*
         Students: The functions we provide inside of TestProvider use this utility class to test
