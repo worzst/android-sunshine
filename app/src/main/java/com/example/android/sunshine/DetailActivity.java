@@ -72,6 +72,8 @@ public class DetailActivity extends AppCompatActivity {
 
             if(intent != null && intent.hasExtra(Intent.EXTRA_TEXT)) {
                 mForecastStr = intent.getStringExtra(Intent.EXTRA_TEXT);
+            }
+            if (null != mForecastStr) {
                 ((TextView) rootView.findViewById(R.id.detailTextView)).setText(mForecastStr);
             }
 
